@@ -6,4 +6,8 @@ export class PokedexApi extends RESTDataSource {
   async getPokemons() {
     return this.get("pokemons");
   }
+
+  async getPokemonByName(name: string) {
+    return this.get(`pokemons/${name}`);
+  }
 }

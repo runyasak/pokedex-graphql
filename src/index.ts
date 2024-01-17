@@ -13,6 +13,7 @@ const app = new Elysia()
 
         type Query {
           pokemons: [Pokemon!]
+          pokemon(name: String!): Pokemon
         }
       `,
       resolvers: {
@@ -23,6 +24,13 @@ const app = new Elysia()
             { dataSources }: { dataSources: { pokedexApi: PokedexApi } }
           ) => {
             return dataSources.pokedexApi.getPokemons();
+          },
+          pokemon: (
+            _,
+            { name }: { name: string },
+            { dataSources }: { dataSources: { pokedexApi: PokedexApi } }
+          ) => {
+            return dataSources.pokedexApi.getPokemonByName(name);
           },
         },
       },
